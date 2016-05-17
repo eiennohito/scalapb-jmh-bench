@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package org.eiennohito;
+
+message Test1{
+  string s1 = 1;
+  int32 i1 = 2;
+  int64 i2 = 3;
+  double d1 = 4;
+}
+
+
+message Test1x {
+  repeated Test2 obj = 1;
+}
+
+message Test2 {
+  repeated Test3 obj = 1;
+}
+
+message Test3 {
+  string s1 = 1;
+}
