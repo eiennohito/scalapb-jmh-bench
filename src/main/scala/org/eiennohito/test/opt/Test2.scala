@@ -15,7 +15,18 @@ final case class Test2(
 
   private[this] def calcSize: Int = {
     var __size = 0
-    obj.foreach(obj => __size += 1 + com.google.protobuf.CodedOutputStream.computeRawVarint32Size(obj.serializedSize) + obj.serializedSize)
+
+    {
+      val iter = obj.iterator
+      while (iter.hasNext) {
+        val obj = iter.next()
+        __size += 1
+        val ss = obj.serializedSize
+        __size += ss
+        __size += com.google.protobuf.CodedOutputStream.computeRawVarint32Size(ss)
+      }
+    }
+
     __size
   }
 
