@@ -3,7 +3,7 @@ package org.eiennohito
 import java.util.concurrent.TimeUnit
 
 import com.google.protobuf.CodedOutputStream
-import org.eiennohito.test.initial.{Test1x, Test2, Test3}
+import org.eiennohito.test.opt.{Test1x, Test2, Test3}
 import org.openjdk.jmh.annotations._
 import org.openjdk.jmh.infra.Blackhole
 
@@ -14,7 +14,7 @@ import org.openjdk.jmh.infra.Blackhole
 @State(Scope.Thread)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 @BenchmarkMode(Array(Mode.AverageTime))
-class Bench2 {
+class Bench3 {
 
   val prototype = {
     val t3 = (0 until 50).map { o => Test3(o.toString) }

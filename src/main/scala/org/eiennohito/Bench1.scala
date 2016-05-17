@@ -1,6 +1,6 @@
 package org.eiennohito
 
-import org.eiennohito.test.Test1
+import org.eiennohito.test.initial.Test1
 import org.openjdk.jmh.annotations._
 import org.openjdk.jmh.infra.Blackhole
 
