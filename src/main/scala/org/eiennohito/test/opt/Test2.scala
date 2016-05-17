@@ -11,11 +11,23 @@ import org.eiennohito.test.opt
 final case class Test2(
   obj: Seq[Test3] = Nil
 ) extends com.trueaccord.scalapb.GeneratedMessage with com.trueaccord.scalapb.Message[Test2] with com.trueaccord.lenses.Updatable[Test2] {
-  @transient
-  lazy val serializedSize: Int = {
+
+
+  private[this] def calcSize: Int = {
     var __size = 0
     obj.foreach(obj => __size += 1 + com.google.protobuf.CodedOutputStream.computeRawVarint32Size(obj.serializedSize) + obj.serializedSize)
     __size
+  }
+
+  @transient
+  private[this] var mysize = -1
+
+
+  override def serializedSize = {
+    if (mysize == -1) {
+      mysize = calcSize
+    }
+    mysize
   }
 
   def writeTo(output: com.google.protobuf.CodedOutputStream): Unit = {
