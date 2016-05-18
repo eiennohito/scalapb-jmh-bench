@@ -10,13 +10,23 @@ package org.eiennohito.test.opt
 final case class Test3(
   s1: String = ""
 ) extends com.trueaccord.scalapb.GeneratedMessage with com.trueaccord.scalapb.Message[Test3] with com.trueaccord.lenses.Updatable[Test3] {
-  @transient
-  lazy val serializedSize: Int = {
+
+  private[this] def calcSize: Int = {
     var __size = 0
     if (s1 != "") {
       __size += com.google.protobuf.CodedOutputStream.computeStringSize(1, s1)
     }
     __size
+  }
+
+  @transient
+  private[this] var mysize = -1
+
+  def serializedSize = {
+    if (mysize == -1) {
+      mysize = calcSize
+    }
+    mysize
   }
 
   def writeTo(output: com.google.protobuf.CodedOutputStream): Unit = {
