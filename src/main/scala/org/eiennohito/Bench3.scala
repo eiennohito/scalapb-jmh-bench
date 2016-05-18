@@ -26,6 +26,13 @@ class Bench3 {
 
   def deepCopy = prototype.copy(obj = prototype.obj.map(x => x.copy(x.obj.map(y => y.copy()))))
 
+  var x = 0
+  @Setup
+  def polluteForeachMethodCache() = {
+    prototype.obj.foreach(_ => x += 1)
+    prototype.obj.flatMap(_.obj).foreach(_ => x += 2)
+  }
+
   @Benchmark
   def copyOnly(bh: Blackhole) = {
     bh.consume(deepCopy)
